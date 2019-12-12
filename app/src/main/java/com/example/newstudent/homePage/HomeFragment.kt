@@ -16,6 +16,7 @@ import androidx.navigation.ui.NavigationUI
 
 import com.example.newstudent.R
 import com.example.newstudent.databinding.FragmentHomeBinding
+import com.example.newstudent.db.StudentDataBase
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -29,7 +30,9 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding:FragmentHomeBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
-        val viewModelFactory = HomePageViewModelFactory()
+        val application = requireNotNull(this.activity).application
+        val dataSource = StudentDataBase.getInstance(application).studentDao
+        val viewModelFactory = HomePageViewModelFactory(dataSource)
         val viewModel = ViewModelProvider(viewModelStore,viewModelFactory).get(HomePageViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

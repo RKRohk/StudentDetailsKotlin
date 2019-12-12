@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.example.newstudent.Converter"/>
         <variable
             name="viewModel"
             type="com.example.newstudent.addStudentPage.AddStudentViewModel" />
