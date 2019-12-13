@@ -8,7 +8,7 @@ import com.example.newstudent.db.Student
 import com.example.newstudent.db.StudentDao
 import kotlinx.coroutines.*
 
-class HomePageViewModel(val database:StudentDao) : ViewModel(){
+class HomePageViewModel(private val database:StudentDao) : ViewModel(){
 
     var _navigate = MutableLiveData<Boolean?>()
 
@@ -16,31 +16,25 @@ class HomePageViewModel(val database:StudentDao) : ViewModel(){
 
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    var _newestStudent = MutableLiveData<Student?>()
-
-    val newestStudent:LiveData<Student?>
-        get() = _newestStudent
-
+    var lastStudent:LiveData<Student>? = null
     fun setNewStudent(){
         uiScope.launch {
-            _newestStudent.value = getNewStudent()
-            if (_newestStudent.value == null)
+            lastStudent = getStudent()
+            if (lastStudent== null) {
                 Log.i("DatabaseOperation","Database null for some reason")
+            }
         }
-        Log.i("DatabaseOperation","Got new student")
     }
-
-    suspend fun getNewStudent():Student?{
+    suspend fun getStudent():LiveData<Student>?{
         return withContext(Dispatchers.IO){
-            var student:Student? = database.getLastStudent()
+            var student = database.getLastStudent()
             student
-        }.also { Log.i("DatabaseOperation","Returning Student") }
+        }
     }
-
     val navigate:LiveData<Boolean?>
         get() = _navigate
 
-    fun initialize(){
+    private fun initialize(){
         _navigate.value = false
     }
 
@@ -51,7 +45,7 @@ class HomePageViewModel(val database:StudentDao) : ViewModel(){
         _navigate.value = null
     }
     init {
-        initialize()
         setNewStudent()
+        initialize()
     }
 }
