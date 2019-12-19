@@ -41,8 +41,10 @@ class HomeFragment : Fragment() {
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddStudentFragment()).also { viewModel.doneNavigating() }
             }
         })
-        binding.listButton.setOnClickListener{
-        }
+        viewModel.listStudent.observe(this, Observer {
+            if(viewModel.listStudent.value == true)
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToStudentList()).also { viewModel.onlistDoneNavigating() }
+        })
         return binding.root
     }
 

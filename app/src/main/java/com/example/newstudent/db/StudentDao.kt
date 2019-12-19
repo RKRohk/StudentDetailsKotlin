@@ -18,6 +18,9 @@ interface StudentDao {
     @Query("SELECT * from student_table")
     fun getAllStudents(): LiveData<List<Student>>
 
+    @Query("SELECT * from student_table ORDER BY id DESC")
+    fun getStudentsList():List<Student>
+
     @Query("DELETE from student_table")
     fun clear()
     @Query("SELECT * from student_table")

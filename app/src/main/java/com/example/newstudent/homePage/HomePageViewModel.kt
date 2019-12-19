@@ -12,6 +12,8 @@ class HomePageViewModel(private val database:StudentDao) : ViewModel(){
 
     var _navigate = MutableLiveData<Boolean?>()
 
+    var _listStudent = MutableLiveData<Boolean?>()
+
     val viewModelJob = Job()
 
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -43,6 +45,17 @@ class HomePageViewModel(private val database:StudentDao) : ViewModel(){
     }
     fun doneNavigating(){
         _navigate.value = null
+        _listStudent.value = null
+    }
+
+    val listStudent:LiveData<Boolean?>
+    get() = _listStudent
+
+    fun onlistButtonClicked(){
+        _listStudent.value = true
+    }
+    fun onlistDoneNavigating(){
+        _listStudent.value = null
     }
     init {
         setNewStudent()
