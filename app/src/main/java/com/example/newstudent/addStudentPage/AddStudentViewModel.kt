@@ -34,20 +34,17 @@ class AddStudentViewModel(val database:StudentDao): ViewModel(){
     }
     fun onButtonPressed(){
         _showToast.value = true
-        _student.value = Student(name = name!!,rollNo = rollno!!.toInt(),cgpa = cgpa!!.toDouble(),id = 0)
+        _student.value = Student(name = name,rollNo = rollno?.toInt(),cgpa = cgpa?.toDouble())
         Log.i("DrumRoll",_student.value!!.name)
         uiScope.launch {
             insertToDatabase(_student.value)
         }
     }
     suspend fun insertToDatabase(student: Student?){
-        withContext(Dispatchers.IO){
-            var uid = database.insertStudent(student!!)
-            if (uid == null)
-                Log.i("DatabaseOperation","UID is NULL")
-            else
-                Log.i("DatabaseOperation","UID = $uid")
+        student?: withContext(Dispatchers.IO){
+            database.insertStudent(student!!)
         }
-        Log.i("DatabaseOperation", "Inserted to database ${student!!.name},${student!!.rollNo},${student!!.cgpa},${student!!.id}")
+            Log.i("DatabaseOperation", "Inserted to database ${student!!.name},${student!!.rollNo},${student!!.cgpa},${student!!.id}")
     }
+
 }

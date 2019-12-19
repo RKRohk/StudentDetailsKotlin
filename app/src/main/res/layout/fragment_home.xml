@@ -33,25 +33,26 @@
             android:id="@+id/latestStudent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.lastStudent.name}"
             app:layout_constraintBottom_toTopOf="@+id/addButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:text="@{viewModel.newestStudent.name}"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <Button
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:onClick="@{() -> viewModel.onButtonClicked()}"
+            android:layout_marginStart="160dp"
+            android:layout_marginEnd="160dp"
             android:text="Add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/listButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> viewModel.onButtonClicked()}"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+<<<<<<< HEAD
         <Button
             android:id="@+id/listButton"
             android:layout_width="wrap_content"
@@ -64,5 +65,7 @@
             app:layout_constraintEnd_toStartOf="@+id/addButton"
             app:layout_constraintStart_toStartOf="parent" />
 
+=======
+>>>>>>> parent of 4100084... Fixed issues with room. I can get all the students as well as the last entered student. Recyclerview implementation pending
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

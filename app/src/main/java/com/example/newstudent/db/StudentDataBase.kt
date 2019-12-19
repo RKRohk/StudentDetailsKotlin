@@ -5,7 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+<<<<<<< HEAD
 @Database(entities = [Student::class],version = 12,exportSchema = false)
+=======
+@Database(entities = [Student::class],version = 1,exportSchema = false)
+>>>>>>> parent of 4100084... Fixed issues with room. I can get all the students as well as the last entered student. Recyclerview implementation pending
 abstract class StudentDataBase : RoomDatabase(){
 
     abstract val studentDao:StudentDao

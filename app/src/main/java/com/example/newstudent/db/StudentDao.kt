@@ -10,10 +10,10 @@ import androidx.room.Query
 @Dao
 interface StudentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertStudent(student: Student):Long
+    fun insertStudent(student: Student)
 
     @Query("SELECT * from student_table ORDER BY id DESC LIMIT 1")
-    fun getLastStudent():LiveData<Student>?
+    fun getLastStudent():Student?
 
     @Query("SELECT * from student_table")
     fun getAllStudents(): LiveData<List<Student>>
@@ -23,7 +23,4 @@ interface StudentDao {
 
     @Query("DELETE from student_table")
     fun clear()
-    @Query("SELECT * from student_table")
-    fun getArray():Array<Student>
-
 }

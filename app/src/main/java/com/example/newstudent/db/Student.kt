@@ -7,11 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "student_table")
 data class Student (
     @PrimaryKey(autoGenerate = true)
-    var id:Long,
+    var id:Long = 0L,
     @ColumnInfo(name = "roll_no")
-    var rollNo:Int,
+    var rollNo:Int?,
     @ColumnInfo(name = "cgpa")
-    var cgpa:Double,
+    var cgpa:Double?,
     @ColumnInfo(name = "name")
-    var name:String
+    var name:String?
 )
